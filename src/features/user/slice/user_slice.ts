@@ -39,16 +39,6 @@ export const userSlice = createSlice({
       state.appLoadCachedUserStatus = action.payload;
     },
   },
-  extraReducers: (builder) => {
-    // builder
-    //   .addCase(incrementAsync.pending, (state) => {
-    //     state.status = 'loading';
-    //   })
-    //   .addCase(incrementAsync.fulfilled, (state, action) => {
-    //     state.status = 'idle';
-    //     state.value = action.payload;
-    //   });
-  },
 });
 
 export const { setUser, updateSignInStatus, updateSignUpStatus, updateCachedUserFetchStatus } =

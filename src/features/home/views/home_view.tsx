@@ -54,23 +54,6 @@ const HomeView: React.FC<{
   const fetchPetsUIStatus = useAppSelector(currentFetchPetsUIState);
   const cacheUserFetchState = useAppSelector(currentUserAppLoadCacheStatus);
 
-  if (fetchPetsUIStatus === CreatePetUIStatus.ERROR) {
-    return (
-      <>
-        <View
-          style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
-        >
-          <Image
-            source={require("assets/no-data.gif")}
-            width={240}
-            height={240}
-            style={styles.image}
-          />
-          <Text>No Pets Available</Text>
-        </View>
-      </>
-    );
-  }
   if (fetchPetsUIStatus === CreatePetUIStatus.LOADING) {
     return (
       <>
@@ -85,12 +68,24 @@ const HomeView: React.FC<{
   }
   return (
     <SafeAreaView style={styles.container}>
-      <FlatList
+      {fetchPetsUIStatus === CreatePetUIStatus.ERROR ? <View>
+        <View
+          style={styles.container}
+        >
+          <Image
+            source={require("assets/no-data.gif")}
+            width={240}
+            height={240}
+            style={styles.image}
+          />
+          <Text>No Pets Available</Text>
+        </View>
+      </View> :  <FlatList
         data={pets}
         renderItem={({ item }) => <PetItem pet={item} isUsersPet={true} />}
         keyExtractor={(item) => item.petId ?? ""}
-        style={styles.container}
-      />
+        style={styles.flatlist}
+      />}
       <AnimatedFAB
         icon={"plus"}
         label={"Add Pet"}
@@ -108,6 +103,11 @@ const HomeView: React.FC<{
 };
 const styles = StyleSheet.create({
   container: {
+    flexGrow: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  flatlist: {
     flexGrow: 1,
   },
   fabStyle: {

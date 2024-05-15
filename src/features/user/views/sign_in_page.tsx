@@ -1,5 +1,5 @@
 import { FunctionComponent } from "react";
-import { Button, Text, TextInput } from "react-native-paper";
+import { Banner, Button, Snackbar, Text, TextInput } from "react-native-paper";
 import {
   LoginUserRequestPayload,
   SignInScreenNavigationProp,
@@ -9,7 +9,11 @@ import {
 } from "..";
 import { Controller, useForm } from "react-hook-form";
 import { useAppSelector, useAppDispatch } from "../../../store/store";
-import { currentSignInStatus, loginUser } from "../slice/user_slice";
+import {
+  currentSignInStatus,
+  loginUser,
+  updateSignInStatus,
+} from "../slice/user_slice";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { View, Image, StyleSheet } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
@@ -40,7 +44,7 @@ const SignInPage: React.FC<{
 
   return (
     <ScrollView>
-      <View>
+      <View style={styles.container}>
         <View style={styles.imageRow}>
           <Image source={require("assets/icon.png")} style={styles.topImage} />
         </View>
@@ -76,7 +80,7 @@ const SignInPage: React.FC<{
                 style={styles.input}
                 placeholder="Password"
                 mode="outlined"
-              secureTextEntry= {true}
+                secureTextEntry={true}
                 onBlur={onBlur}
                 onChangeText={onChange}
                 value={value}
@@ -106,6 +110,21 @@ const SignInPage: React.FC<{
             Don't have an account?
           </Button>
         </View>
+        <Snackbar
+          visible={loadingState === UserAuthStatus.ERROR}
+          onDismiss={() => {
+            dispatch(updateSignInStatus(UserAuthStatus.IDLE));
+          }}
+          action={{
+            label: "Retry",
+            onPress: () => {
+              dispatch(updateSignInStatus(UserAuthStatus.IDLE));
+            },
+          }}
+        >
+          Login Failed, Please check your email and password or create an
+          account.
+        </Snackbar>
       </View>
     </ScrollView>
   );
@@ -113,9 +132,12 @@ const SignInPage: React.FC<{
 
 const styles = StyleSheet.create({
   container: {
-    flexGrow: 1,
+    flex: 1,
+    // flexGrow: 1,
     padding: 16,
     marginTop: 16,
+    justifyContent: "center",
+    alignContent: "center",
   },
   input: {
     marginBottom: 8,

@@ -56,7 +56,7 @@ const PetListingPage: React.FC<{
     return (
       <>
         <View
-          style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
+          style={styles.container}
         >
           <Image
             source={require("assets/no-data.gif")}
@@ -98,7 +98,7 @@ const PetListingPage: React.FC<{
           />
         )}
         keyExtractor={(item) => item.petId ?? ""}
-        style={styles.container}
+        style={styles.flatlist}
       />
     </SafeAreaView>
   );
@@ -106,11 +106,16 @@ const PetListingPage: React.FC<{
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
+    alignItems: "center",
+    justifyContent: "center",
   },
   fabStyle: {
     bottom: 16,
     right: 16,
     position: "absolute",
+  },
+  flatlist: {
+    flexGrow: 1,
   },
   image: {
     width: 240,

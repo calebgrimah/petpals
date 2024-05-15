@@ -20,6 +20,7 @@ import {
   currentCreateBookingUIStatus,
 } from "../../bookings/slice/bookings_slice";
 import { BookingsUIStatus } from "../../bookings";
+import { currentSelectedPet } from 'features/pets/slice/pets_slice';
 
 interface PetItemProps {
   pet: Pet;
@@ -29,6 +30,8 @@ interface PetItemProps {
 const PetItem: React.FC<PetItemProps> = ({ pet, isUsersPet }) => {
   const dispatch = useAppDispatch();
   const createBookingUIStatus = useAppSelector(currentCreateBookingUIStatus);
+  const currentlySelectedPet = useAppSelector(currentSelectedPet);
+  
 
   return (
     <Card style={styles.card}>
@@ -47,8 +50,8 @@ const PetItem: React.FC<PetItemProps> = ({ pet, isUsersPet }) => {
               dispatch(setSelectedPet(pet));
               dispatch(createUserBooking(pet.petId ?? ""));
             }}
-            loading={createBookingUIStatus === BookingsUIStatus.LOADING}
-            disabled={createBookingUIStatus === BookingsUIStatus.LOADING}
+            loading={currentlySelectedPet?.petId === pet.petId && createBookingUIStatus === BookingsUIStatus.LOADING}
+            disabled={currentlySelectedPet?.petId === pet.petId  && createBookingUIStatus === BookingsUIStatus.LOADING}
           >
             Book Session
           </Button>

@@ -12,7 +12,7 @@ import {
 } from "..";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { View } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { UserAuthStatus } from "../../user";
 import { createPet, currentCreatePetUIState } from "../slice/pets_slice";
 import { useAppSelector, useAppDispatch } from "../../../store/store";
@@ -39,7 +39,7 @@ const PetDetailPage: React.FC<{
     const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
     if (status !== "granted") {
       setVisible(true);
-      // alert("Sorry, we need camera roll permissions to make this work!");
+      alert("Sorry, we need camera roll permissions to make this work!");
     }
   }
 
@@ -101,8 +101,16 @@ const PetDetailPage: React.FC<{
       >
         Pick an Image
       </Snackbar>
-      <Image source={{ uri: selectedImage?.assets[0].uri }} style={{ width: 250, height: 250 }} />
+      <View style={styles.imageContainer}>
+        <Image
+          source={{ uri: selectedImage?.assets[0].uri }}
+          style={styles.image}
+        />
+      </View>
       <Button
+        style={{
+          margin: 16,
+        }}
         icon="camera"
         mode="contained"
         onPress={() => {
@@ -111,7 +119,7 @@ const PetDetailPage: React.FC<{
       >
         Select Image
       </Button>
-      <View>
+      <View style={styles.container}>
         <Controller
           control={control}
           rules={{
@@ -122,6 +130,8 @@ const PetDetailPage: React.FC<{
               placeholder="Pet name"
               onBlur={onBlur}
               onChangeText={onChange}
+              mode="outlined"
+              style={styles.input}
               value={value}
             />
           )}
@@ -141,6 +151,8 @@ const PetDetailPage: React.FC<{
               onBlur={onBlur}
               onChangeText={onChange}
               value={value}
+              mode="outlined"
+              style={styles.input}
             />
           )}
           name="description"
@@ -160,6 +172,8 @@ const PetDetailPage: React.FC<{
               onChangeText={onChange}
               value={value.toString()}
               keyboardType="numeric"
+              mode="outlined"
+              style={styles.input}
             />
           )}
           name="age"
@@ -178,6 +192,8 @@ const PetDetailPage: React.FC<{
               onBlur={onBlur}
               onChangeText={onChange}
               value={value}
+              mode="outlined"
+              style={styles.input}
             />
           )}
           name="breed"
@@ -196,6 +212,8 @@ const PetDetailPage: React.FC<{
               onBlur={onBlur}
               onChangeText={onChange}
               value={value}
+              mode="outlined"
+              style={styles.input}
             />
           )}
           name="color"
@@ -214,6 +232,8 @@ const PetDetailPage: React.FC<{
               onBlur={onBlur}
               onChangeText={onChange}
               value={value.toString()}
+              mode="outlined"
+              style={styles.input}
             />
           )}
           name="weight"
@@ -232,6 +252,8 @@ const PetDetailPage: React.FC<{
               onBlur={onBlur}
               onChangeText={onChange}
               value={value}
+              mode="outlined"
+              style={styles.input}
             />
           )}
           name="species"
@@ -250,6 +272,8 @@ const PetDetailPage: React.FC<{
               onBlur={onBlur}
               onChangeText={onChange}
               value={value.toString()}
+              mode="outlined"
+              style={styles.input}
             />
           )}
           name="aggressionLevel"
@@ -269,6 +293,8 @@ const PetDetailPage: React.FC<{
               placeholder="Traits"
               onBlur={onBlur}
               onChangeText={onChange}
+              mode="outlined"
+              style={styles.input}
               value={value?.toString()}
             />
           )}
@@ -285,18 +311,34 @@ const PetDetailPage: React.FC<{
         >
           Create Pet
         </Button>
-        {/* <Button
-          icon="face-man-profile"
-          mode="text"
-          onPress={() => {
-            navigation.replace("SignIn");
-          }}
-        >
-          Already have an account?
-        </Button> */}
       </View>
     </ScrollView>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    margin: 16,
+  },
+  fabStyle: {
+    bottom: 16,
+    right: 16,
+    position: "absolute",
+  },
+  input: {
+    marginBottom: 8,
+  },
+  image: {
+    width: 360,
+    height: 360,
+  },
+  imageContainer: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "center",
+    margin: 16,
+  },
+});
 
 export default PetDetailPage;
