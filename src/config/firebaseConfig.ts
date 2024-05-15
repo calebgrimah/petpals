@@ -8,6 +8,8 @@ import {
   getAuth
 } from "firebase/auth";
 
+
+//temporary impl, use environment values for production deployments.
 const firebaseConfig = {
   apiKey: "AIzaSyBK4wAb5A7u87O0jGfLyVncGKtJZKIzzU8",
   authDomain: "petpals-database.firebaseapp.com",

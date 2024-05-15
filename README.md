@@ -57,6 +57,6 @@ PetPals is a mobile application developed using React Native. It connects users 
 
 1. Clone the repository:
    ```sh
-   git clone https://github.com/calebgrimah/petpals.git
+   git clone https://github.com/calebgrimah/petpals.git 
    cd petpals
    npx expo start
