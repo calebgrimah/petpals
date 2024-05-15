@@ -19,7 +19,7 @@ const AppointmentsPage: FunctionComponent<AppointmentsPageProps> = () => {
 
   useEffect(() => {
     dispatch(fetchAllUserBookings());
-  }, []);
+  }, [bookings]);
 
   if (fetchBookingsUIStatus === BookingsUIStatus.ERROR) {
     return (

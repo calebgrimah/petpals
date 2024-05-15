@@ -7,7 +7,7 @@ PetPals is a mobile application developed using React Native. It connects users 
 ## Features
 
 - Browse available animals for companionship.
-- Users are able to create pet records(images included) for other users to book companionship services.
+- Users are able to create pet new records(images included) for other users to book companionship services.
 - Book Animal for companionship.
 - User authentication and management using firebase.
 - Persistent storage of user data.
@@ -59,4 +59,10 @@ PetPals is a mobile application developed using React Native. It connects users 
    ```sh
    git clone https://github.com/calebgrimah/petpals.git 
    cd petpals
+   npm install
    npx expo start
+
+## TODO:
+- Add unit, integration tests.
+- Improve UI/UX
+- Add features regarding bookings.
