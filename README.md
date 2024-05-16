@@ -66,3 +66,10 @@ PetPals is a mobile application developed using React Native. It connects users 
 - Add unit, integration tests.
 - Improve UI/UX
 - Add features regarding bookings.
+
+## Usage
+- Launch application, and login or create an account to access application dashboard.
+- The "MyPets" bottom tabs contains a list of pets(animals) created by the authenticated user. There is also a floating action button to create a new pet by the authenticated user.
+- The "Pets" bottom tab contains a list of all pets created by all users, this means users can only book pets not created by them.
+- Each pet item tab has a "book" button that allows the user book a time with the pet
+- The last bottom tab contains a list of all bookings created and received by the user.
